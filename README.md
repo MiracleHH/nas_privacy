@@ -62,7 +62,7 @@ Then we can use the following command to train a GIN regression model based on t
 python surrogate_models/fit_meminf.py --model gnn_gin --nasbench_data ../nas_eval/data/genos/origin/meminf --data_config_path surrogate_models/configs/data_configs/nb_301_meminf.json --log_dir experiments/surrogate_models 
 ```
 
-### Operation Importance Calculation
+### Operation Importance Evaluation
 
 We can use the following command to calculate the Operation Importance scores for the edges existing in the architectures with the largest 297 (set 1 to the parameter`largest`) and the smallest 303 (set 0 to the parameter `largest`) MIA AUC socres respectively:
 
