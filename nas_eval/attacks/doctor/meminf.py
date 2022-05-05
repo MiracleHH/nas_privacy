@@ -871,7 +871,6 @@ class NAS2normal(nn.Module):
         return results
 
 def label_only_attack(estimator, x_train, y_train, x_test, y_test, sample_size, xshape, num_classes, seed, is_nas):
-    #x_train, x_test=x_train.astype(np.float), x_test.astype(np.float)
     print('x_train.min(): {}, x_train.max(): {}'.format(x_train.min(),x_train.max()))
     print('x_test.min(): {}, x_test.max(): {}'.format(x_test.min(),x_test.max()))
     low=min(x_train.min(),x_test.min())
@@ -885,7 +884,6 @@ def label_only_attack(estimator, x_train, y_train, x_test, y_test, sample_size, 
             optimizer=optim.SGD(estimator.parameters(), lr=1e-2, momentum=0.9, weight_decay=5e-4),
             input_shape=xshape,
             nb_classes=num_classes,
-            #clip_values=(0, 1)
             clip_values=(low, high)
         )
     else:
@@ -895,15 +893,10 @@ def label_only_attack(estimator, x_train, y_train, x_test, y_test, sample_size, 
             optimizer=optim.SGD(estimator.parameters(), lr=1e-2, momentum=0.9, weight_decay=5e-4),
             input_shape=xshape,
             nb_classes=num_classes,
-            #clip_values=(0, 1)
             clip_values=(low, high)
         )
 
-    #meminf_lo=LabelOnlyDecisionBoundary(classifier)
-    #meminf_lo=LabelOnlyDecisionBoundary(classifier)
-    
-    #attack_train_size=int(len(x_train)*attack_ratio)
-    #attack_test_size=int(len(x_test)*attack_ratio)
+
     train_indices=list(range(len(x_train)))
     test_indices=list(range(len(x_test)))
 
@@ -950,26 +943,3 @@ def label_only_attack(estimator, x_train, y_train, x_test, y_test, sample_size, 
 
     auc = roc_auc_score(y_truth, distance)
     print("Label-Only Membership Inference Attack AUC: {:4f}".format(auc))
-
-    '''
-
-    print("Start Attack!")
-
-    if attack_type=="label_only_0":
-        # Choquette-Choo
-        meminf_lo.calibrate_distance_threshold(x_train[:attack_train_size], y_train[:attack_train_size],\
-            x_test[:attack_test_size], y_test[:attack_test_size])
-    elif attack_type=="label_only_1":
-        # Li
-        meminf_lo.calibrate_distance_threshold_unsupervised(top_t=50, num_samples=100, max_queries=100)
-    else:
-        raise ValueError("Attack type `{}` is not supported.".format(attack_type))
-
-    inferred_train_lo=meminf_lo.infer(x_train[attack_train_size:attack_train_size*2], y_train[attack_train_size:attack_train_size*2])
-    inferred_test_lo=meminf_lo.infer(x_test[attack_test_size:attack_test_size*2],y_test[attack_test_size:attack_test_size*2])
-
-    test_auc=roc_auc_score(np.concatenate((inferred_train_lo,inferred_test_lo),axis=0),\
-        np.concatenate((np.ones(len(inferred_train_lo)),np.zeros(len(inferred_test_lo))),axis=0))
-
-    print("Label-Only Membership Inference Attack AUC: {:4f}".format(test_auc))
-    '''
