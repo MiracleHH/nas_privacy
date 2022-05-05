@@ -20,10 +20,6 @@ from attacks.utils.train import *
 from attacks.utils.dataloader import *
 from opacus.validators.module_validator import ModuleValidator
 
-#from model import procedure
-#from xautodl.config_utils import load_config
-
-#os.environ['CUDA_VISIBLE_DEVICES']='1'
 
 nas_list=["darts_v1", "darts_v2", "enas", "gdas", "tenas", "drnas", "pc_darts", "sdarts", "random", "setn"]
 
