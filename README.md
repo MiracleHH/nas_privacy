@@ -38,7 +38,7 @@ python test_change.py --data_path ./data --dataset cifar10 --geno_path ./data/ge
 Here, the parameter `cell_type` represents `Only-Normal`, `Only-Reduction` and `Dual` modifications for 0, 1 and 2 respectively, while the parameter `change_type` means MIA demotion and MIA promotion for 0 and 1 respectively. You can also set the defense type by the parameter `defense` (0 means no defense), and the parameter `budget` stands for the modification budget for the cell pattern.
 
 
-## Instruction to Re-Analyze the Cell Patterns
+## Instructions to Re-Analyze the Cell Patterns
 
 We can follow the following instructions to re-genreate all necessary data and re-analyze the hidden cell patterns.
 
