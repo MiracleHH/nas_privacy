@@ -64,7 +64,7 @@ python surrogate_models/fit_meminf.py --model gnn_gin --nasbench_data ../nas_eva
 
 ### Operation Importance Evaluation
 
-We can use the following command to calculate the Operation Importance scores for the edges existing in the architectures with the largest 297 (set 1 to the parameter`largest`) and the smallest 303 (set 0 to the parameter `largest`) MIA AUC socres respectively:
+We can use the following command to calculate the Operation Importance scores for the edges existing in the architectures with the largest 297 (set the parameter`largest` to 1) and the smallest 303 (set the parameter `largest` to 0) MIA AUC socres respectively:
 
 ```Shell
 python data_generation/full_analyze.py --largest 0 --use_t 0 --model_path ./experiments/surrogate_models/gnn_gin/20220216-082831-6 --data_path ../nas_eval/data/genos/origin/meminf --save_path ./nas_eval/data/genos/origin/meminf/stats
