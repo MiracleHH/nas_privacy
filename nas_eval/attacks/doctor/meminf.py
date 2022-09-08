@@ -493,6 +493,7 @@ class attack_for_whitebox():
 
     def prepare_dataset(self):
         with open(self.ATTACK_SETS + "train.p", "wb") as f:
+                
             for inputs, targets, members in self.attack_train_loader:
                 inputs, targets = inputs.to(self.device), targets.to(self.device)
                 output, loss, gradient, label = self._get_data(self.shadow_model, inputs, targets, self.nas_flag-1, False)

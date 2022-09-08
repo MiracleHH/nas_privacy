@@ -1,6 +1,6 @@
 # On the Privacy Risks of Cell-Based NAS Architectures
 
-This is the code implementation for the paper "On the Privacy Risks of Cell-Based NAS Architectures".
+This is the code implementation for our CCS 2022 paper "On the Privacy Risks of Cell-Based NAS Architectures" [[arXiv](https://arxiv.org/abs/2209.01688)].
 
 ## Environment Setup
 
@@ -85,3 +85,31 @@ Please manually add the generated cell patterns to the `data_generation/full_cha
 ```
 python data_generation/full_change.py --data_path ../nas_eval/data/genos/origin/meminf --save_path ../nas_eval/data/genos/changed --change_type 0 --cell_type 1 --budget 4
 ```
+
+### Citation
+
+If you find this code helpful in your research, please consider citing our paper:
+
+```
+@article{HZSBLZ22,
+author = {Hai Huang and Zhikun Zhang and Yun Shen and Michael Backes and Qi Li and Yang Zhang},
+title = {{On the Privacy Risks of Cell-Based NAS Architectures}},
+journal = {{CoRR abs/2209.01688}},
+year = {2022}
+}
+```
+
+
+### Acknowledgements
+
+We thank the maintainers of the following open-sourced respositories:
+
+1. [https://github.com/D-X-Y/AutoDL-Projects](https://github.com/D-X-Y/AutoDL-Projects)
+2. [https://github.com/VITA-Group/TENAS](https://github.com/VITA-Group/TENAS)
+3. [https://github.com/yuhuixu1993/PC-DARTS](https://github.com/yuhuixu1993/PC-DARTS)
+4. [https://github.com/xiangning-chen/DrNAS](https://github.com/xiangning-chen/DrNAS)
+5. [https://github.com/xiangning-chen/SmoothDARTS](https://github.com/xiangning-chen/SmoothDARTS)
+6. [https://github.com/liuyugeng/ML-Doctor](https://github.com/liuyugeng/ML-Doctor)
+7. [https://github.com/automl/nasbench301](https://github.com/automl/nasbench301)
+8. [https://github.com/tomgoldstein/loss-landscape](https://github.com/tomgoldstein/loss-landscape)
+
