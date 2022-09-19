@@ -237,7 +237,7 @@ class attack_for_blackbox():
         self.nas_flag=nas_flag
         self.use_memGuard=use_memGuard
 
-    def _get_data(self, model, inputs, use_nas, use_memGuard):
+    def _get_data(self, model, inputs, targets, use_nas, use_memGuard):
         if use_nas>0:
             _, result = model(inputs)
         else:
@@ -247,17 +247,9 @@ class attack_for_blackbox():
             result=memGuard.forward(result)
         
         output, _ = torch.sort(result, descending=True)
-        # results = F.softmax(results[:,:5], dim=1)
+
         _, predicts = result.max(1)
-        
-        prediction = []
-        for predict in predicts:
-            prediction.append([1,] if predict else [0,])
-
-        prediction = torch.Tensor(prediction)
-
-        # final_inputs = torch.cat((results, prediction), 1)
-        # print(final_inputs.shape)
+        prediction = predicts.eq(targets).float()
 
         return output, prediction
 
@@ -265,7 +257,7 @@ class attack_for_blackbox():
         with open(self.ATTACK_SETS + "train.p", "wb") as f:
             for inputs, targets, members in self.attack_train_loader:
                 inputs, targets = inputs.to(self.device), targets.to(self.device)
-                output, prediction = self._get_data(self.shadow_model, inputs, self.nas_flag-1, False)
+                output, prediction = self._get_data(self.shadow_model, inputs, targets, self.nas_flag-1, False)
                 # output = output.cpu().detach().numpy()
             
                 pickle.dump((output, prediction, members), f)
@@ -275,7 +267,7 @@ class attack_for_blackbox():
         with open(self.ATTACK_SETS + "test.p", "wb") as f:
             for inputs, targets, members in self.attack_test_loader:
                 inputs, targets = inputs.to(self.device), targets.to(self.device)
-                output, prediction = self._get_data(self.target_model, inputs, self.nas_flag, self.use_memGuard)
+                output, prediction = self._get_data(self.target_model, inputs, targets, self.nas_flag, self.use_memGuard)
                 # output = output.cpu().detach().numpy()
             
                 pickle.dump((output, prediction, members), f)
