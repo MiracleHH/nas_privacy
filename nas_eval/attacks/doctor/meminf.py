@@ -245,13 +245,13 @@ class attack_for_blackbox():
         if use_memGuard:
             memGuard=MemGuard()
             result=memGuard.forward(result)
+
+        _, predicts = result.max(1)
+        prediction = predicts.eq(targets).float().unsqueeze(1)
         
         output, _ = torch.sort(result, descending=True)
 
-        _, predicts = result.max(1)
-        prediction = predicts.eq(targets).float()
-
-        return output, prediction
+        return output.detach().cpu(), prediction.detach().cpu()
 
     def prepare_dataset(self):
         with open(self.ATTACK_SETS + "train.p", "wb") as f:
@@ -481,7 +481,7 @@ class attack_for_whitebox():
         outputs, _ = torch.sort(results, descending=True)
         labels = torch.Tensor(labels)
 
-        return outputs, losses, gradients, labels
+        return outputs.detach().cpu(), losses.cpu(), gradients.detach().cpu(), labels.cpu()
 
     def prepare_dataset(self):
         with open(self.ATTACK_SETS + "train.p", "wb") as f:
