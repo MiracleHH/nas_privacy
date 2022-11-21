@@ -1,6 +1,6 @@
 # On the Privacy Risks of Cell-Based NAS Architectures
 
-This is the code implementation for our CCS 2022 paper "On the Privacy Risks of Cell-Based NAS Architectures" [[arXiv](https://arxiv.org/abs/2209.01688)].
+This is the code implementation for our CCS 2022 paper "On the Privacy Risks of Cell-Based NAS Architectures" [[PDF](https://dl.acm.org/doi/10.1145/3548606.3560619)] [[arXiv](https://arxiv.org/abs/2209.01688)].
 
 ## Environment Setup
 
@@ -91,10 +91,12 @@ python data_generation/full_change.py --data_path ../nas_eval/data/genos/origin/
 If you find this code helpful in your research, please consider citing our paper:
 
 ```
-@article{HZSBLZ22,
+@inproceedings{HZSBLZ22,
 author = {Hai Huang and Zhikun Zhang and Yun Shen and Michael Backes and Qi Li and Yang Zhang},
 title = {{On the Privacy Risks of Cell-Based NAS Architectures}},
-journal = {{CoRR abs/2209.01688}},
+booktitle = {{ACM SIGSAC Conference on Computer and Communications Security (CCS)}},
+pages = {1427–1441},
+publisher = {ACM},
 year = {2022}
 }
 ```
